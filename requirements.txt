@@ -2,3 +2,17 @@ torch>=1.8.0,<=1.11
 transformers>=4.20.0
 git+https://github.com/RaphaelOlivier/pyaudlib.git
 git+https://github.com/RaphaelOlivier/speechbrain.git
+
+#old version of speechbrain, torch and transformers!!u
+
+# soundfile                0.13.1 #backend for torchaudio
+# transformers             4.53.2
+# torch                    2.7.1
+# torchaudio               2.7.1
+# numpy                    2.3.1
+# speechbrain              1.0.3
+# pandas==2.3.1
+# scikit-dimension==0.3.4
+# librosa==0.11.0
+# matplotlib==3.8.2
+# numpy==2.3.1

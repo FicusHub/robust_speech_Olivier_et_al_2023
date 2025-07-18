@@ -7,7 +7,7 @@ import torch.nn.functional as F
 import speechbrain as sb
 import torch
 import torch.nn as nn
-from speechbrain.lobes.models.huggingface_wav2vec import HuggingFaceWav2Vec2
+from speechbrain.lobes.models.huggingface_transformers.wav2vec2 import Wav2Vec2 as HuggingFaceWav2Vec2
 from transformers import (
     HubertConfig,
     HubertModel,
@@ -20,9 +20,9 @@ from transformers import (
     Data2VecAudioModel,
 )
 from transformers.models.data2vec.modeling_data2vec_audio import Data2VecAudioFeatureEncoder
-from speechbrain.pretrained.fetching import fetch
+from speechbrain.inference import fetch
 import transformers
-from speechbrain.lobes.models.huggingface_wav2vec import HuggingFaceWav2Vec2Pretrain, HF_models, HF_config
+from speechbrain.lobes.models.huggingface_transformers.wav2vec2 import Wav2Vec2Pretrain as HuggingFaceWav2Vec2Pretrain
 from transformers import Wav2Vec2ForPreTraining
 from transformers.file_utils import (
     add_start_docstrings_to_model_forward,
@@ -30,8 +30,6 @@ from transformers.file_utils import (
 )
 from transformers.models.wav2vec2.configuration_wav2vec2 import Wav2Vec2Config as Wav2Vec2PretrainConfig
 from transformers.models.wav2vec2.modeling_wav2vec2 import (
-    _CONFIG_FOR_DOC,
-    WAV_2_VEC_2_INPUTS_DOCSTRING,
     Wav2Vec2ForPreTrainingOutput,
     _compute_mask_indices,
 )
@@ -113,9 +111,9 @@ class AdvWav2Vec2ForPreTraining(Wav2Vec2ForPreTraining):
         super().__init__(config)
         self.wav2vec2.feature_extractor = AdvWav2Vec2FeatureEncoder(config)
 
-    @add_start_docstrings_to_model_forward(WAV_2_VEC_2_INPUTS_DOCSTRING)
+    @add_start_docstrings_to_model_forward("")
     @replace_return_docstrings(
-        output_type=Wav2Vec2ForPreTrainingOutput, config_class=_CONFIG_FOR_DOC
+        output_type=Wav2Vec2ForPreTrainingOutput, config_class="Wav2Vec2Config"
     )
     def forward(
         self,
@@ -525,7 +523,7 @@ class AdvHuggingFaceWav2Vec2(HuggingFaceWav2Vec2):
             self.model = model(config)
             return
         else:
-            is_sb, ckpt_file = self._check_model_source(source)
+            is_sb, ckpt_file, is_local = self._check_model_source(source, save_path)
             if is_sb:
                 self.model = model(config)
                 self.model.gradient_checkpointing_disable()  # Required by DDP

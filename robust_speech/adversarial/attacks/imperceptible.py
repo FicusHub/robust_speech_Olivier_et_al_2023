@@ -621,7 +621,7 @@ class ImperceptibleASRAttack(Attacker):
             window=window,
             center=False,
             return_complex=True,
-        ).numpy()
+        ).detach().cpu().numpy()
         transformed_wav *= np.sqrt(8.0 / 3.0)
 
         psd = abs(transformed_wav / self.win_length)

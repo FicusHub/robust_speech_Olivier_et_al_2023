@@ -13,7 +13,7 @@ import sys
 import speechbrain as sb
 import torch
 import torch.nn as nn
-from speechbrain.lobes.models.huggingface_wav2vec import HuggingFaceWav2Vec2
+from speechbrain.lobes.models.huggingface_transformers.wav2vec2 import Wav2Vec2 as HuggingFaceWav2Vec2
 from transformers import (
     HubertConfig,
     HubertModel,

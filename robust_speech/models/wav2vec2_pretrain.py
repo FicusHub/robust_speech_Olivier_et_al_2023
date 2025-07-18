@@ -21,7 +21,7 @@ import speechbrain as sb
 import torch
 import torch.nn.functional as F
 import transformers
-from speechbrain.lobes.models.huggingface_wav2vec import HuggingFaceWav2Vec2Pretrain
+from speechbrain.lobes.models.huggingface_transformers.wav2vec2 import Wav2Vec2Pretrain as HuggingFaceWav2Vec2Pretrain
 from transformers import Wav2Vec2ForPreTraining
 from transformers.file_utils import (
     add_start_docstrings_to_model_forward,
@@ -29,8 +29,6 @@ from transformers.file_utils import (
 )
 from transformers.models.wav2vec2.configuration_wav2vec2 import Wav2Vec2Config
 from transformers.models.wav2vec2.modeling_wav2vec2 import (
-    _CONFIG_FOR_DOC,
-    WAV_2_VEC_2_INPUTS_DOCSTRING,
     Wav2Vec2FeatureExtractor,
     Wav2Vec2ForPreTrainingOutput,
     _compute_mask_indices,
